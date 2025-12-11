@@ -1,0 +1,57 @@
+import 'dart:convert';
+
+class Todo {
+  final int id;
+  final String todo;
+  final String completed;
+  final int userId;
+  Todo({
+    required this.id,
+    required this.todo,
+    required this.completed,
+    required this.userId,
+  });
+
+  Todo copyWith({
+    int? id,
+    String? todo,
+    String? completed,
+    int? userId,
+  }) {
+    return Todo(
+      id: id ?? this.id,
+      todo: todo ?? this.todo,
+      completed: completed ?? this.completed,
+      userId: userId ?? this.userId,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'todo': todo,
+      'completed': completed,
+      'userId': userId,
+    };
+  }
+
+  factory Todo.fromMap(Map<String, dynamic> map) {
+    return Todo(
+      id: map['id']?.toInt() ?? 0,
+      todo: map['todo'] ?? '',
+      completed: map['completed'] ?? '',
+      userId: map['userId']?.toInt() ?? 0,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory Todo.fromJson(String source) => Todo.fromMap(json.decode(source));
+
+  @override
+  String toString() {
+    return 'Todo(id: $id, todo: $todo, completed: $completed, userId: $userId)';
+  }
+
+
+}
