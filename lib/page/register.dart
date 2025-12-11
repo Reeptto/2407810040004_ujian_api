@@ -1,4 +1,8 @@
+import 'dart:convert';
+
+import 'package:ari_2407810040004_ujian_api/page/todo.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -21,6 +25,61 @@ class _RegisterPageState extends State<RegisterPage> {
     setState(() {
       loading = true;
     });
+  }
+
+  Future<void> _registerUser() async {
+    String firstName = _firstNameController.text;
+    String lastName = _lastNameController.text;
+    String age = _ageController.text;
+    String email = _emailController.text;
+
+    if (firstName.isEmpty || email.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Nama dan email wajib diisi!")),
+        );
+      return;
+    }
+
+    final String url = 'https://dummyjson.com/users';
+
+    try {
+      final response = await http.post(Uri.parse(url),
+      headers: {"Content-Type": "application/json"},
+      body: jsonEncode({
+        "firstName": firstName,
+        "lastName": lastName,
+        "age": age,
+        "email": email,
+      }),
+      );
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        if (!mounted) return;
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content:  Text("Berhasil Mendaftar: $firstName $lastName"),
+              backgroundColor: Colors.green,
+             ),
+          ); 
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const TodoPage()),   
+          );
+        }else {
+          if (!mounted) return;
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Gagal: ${response.statusCode} - ${response.body}"),
+          backgroundColor: Colors.red,
+          ));
+        }
+    } catch (e) {
+      if (!mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Terjadi kesalahan: $e"),
+        backgroundColor: Colors.red,
+      ),
+      );
+    } finally {
+      if (mounted) {
+        setState(() {
+          loading = false;
+        });
+      }
+    }
   }
   
   @override
