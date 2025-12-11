@@ -107,6 +107,7 @@ class _RegisterPageState extends State<RegisterPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               TextField(
+                controller: _firstNameController,
                 decoration: InputDecoration(
                   labelText: 'First Name',
                   border: OutlineInputBorder()
@@ -114,6 +115,7 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               SizedBox(height: 20,),
               TextField(
+                controller: _lastNameController,
                 decoration: InputDecoration(
                   labelText: 'Last Name',
                   border: OutlineInputBorder()
@@ -121,6 +123,7 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               SizedBox(height: 20,),
               TextField(
+                controller: _ageController,
                 decoration: InputDecoration(
                   labelText: 'Age',
                   border: OutlineInputBorder()
@@ -128,6 +131,7 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               SizedBox(height: 20,),
               TextField(
+                controller: _emailController,
                 decoration: InputDecoration(
                   labelText: 'Email',
                   border: OutlineInputBorder()
@@ -135,7 +139,7 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               SizedBox(height: 20,),
                ElevatedButton(
-                onPressed: loading ? null :cekLogin,
+                onPressed: loading ? null :_registerUser,
 
                 // Memberikan warna ungu pada tombol (sesuai contoh)
                 style: ElevatedButton.styleFrom(
@@ -145,7 +149,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 child: loading
                     ? CircularProgressIndicator(color: Colors.white)
                     : Text("Masuk", style: TextStyle(
-                      color: Colors.white
+                      color: Colors.black
                     ),),
               ),
             ],
