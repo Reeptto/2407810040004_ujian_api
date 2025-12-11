@@ -7,6 +7,7 @@ class RegisterPage extends StatefulWidget {
   State<RegisterPage> createState() => _RegisterPageState();
 }
 
+
 class _RegisterPageState extends State<RegisterPage> {
   // 1. Membuat Controller untuk mengambil input user
   final TextEditingController _firstNameController = TextEditingController();
@@ -15,7 +16,12 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController _emailController = TextEditingController();
 
   bool loading = false;
-
+  
+  Future<void> cekLogin() async {
+    setState(() {
+      loading = true;
+    });
+  }
   
   @override
   void dispose() {
@@ -68,20 +74,20 @@ class _RegisterPageState extends State<RegisterPage> {
                   border: OutlineInputBorder()
                 ),
               ),
+              SizedBox(height: 20,),
                ElevatedButton(
                 onPressed: loading ? null :cekLogin,
 
                 // Memberikan warna ungu pada tombol (sesuai contoh)
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.deepPurple,
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
+                  // backgroundColor: Colors.deepPurple,
+                  
                 ),
                 child: loading
                     ? CircularProgressIndicator(color: Colors.white)
-                    : Text("Masuk"),
+                    : Text("Masuk", style: TextStyle(
+                      color: Colors.white
+                    ),),
               ),
             ],
           ),
