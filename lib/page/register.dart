@@ -40,7 +40,7 @@ class _RegisterPageState extends State<RegisterPage> {
       return;
     }
 
-    final String url = 'https://dummyjson.com/users';
+    final String url = 'https://dummyjson.com/users/add';
 
     try {
       final response = await http.post(Uri.parse(url),
@@ -59,7 +59,8 @@ class _RegisterPageState extends State<RegisterPage> {
               backgroundColor: Colors.green,
              ),
           ); 
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const TodoPage()),   
+            Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => const TodoPage()),   
           );
         }else {
           if (!mounted) return;

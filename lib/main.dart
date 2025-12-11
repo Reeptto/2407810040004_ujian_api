@@ -1,4 +1,5 @@
-import 'package:ari_2407810040004_ujian_api/page/register.dart';
+// import 'package:ari_2407810040004_ujian_api/page/register.dart';
+import 'package:ari_2407810040004_ujian_api/page/todo.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       //   "/halaman2":(context)=>Page2()
       // },
       // initialRoute: "/",
-      home: RegisterPage()
+      home: TodoPage()
     );
   }
 }
